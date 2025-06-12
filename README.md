@@ -1,4 +1,5 @@
-MCS 253 MAJOR PROJECT 2025
+"MCS 253 MAJOR PROJECT 2025"
+
 The project is about how to know which learning preference is best for learners.
 my code comprises of functions and attributes. class is created but no subclass and so inheritance is not applied
 The data was captured in  a dictionary and exception is used.
