@@ -1,0 +1,89 @@
+
+
+
+class VARK:
+    def __init__(self):
+        
+        
+           self.questions = {" Question1.You are helping someone who wants to go to your airport, town centre or railway station. You would:":
+                    {"a. go with her.","b.tell her the directions.","c. write down the directions.","d. draw, or give her a map."},
+                    " Question2.You are not sure whether a word should be spelled `dependent' or `dependant'. You would:":
+                    {"a. see the words in your mind and choose by the way they look."," b. think about how each word sounds and choose one",
+                    "c. find it in a dictionary.","d. write both words on paper and choose one."},
+                    "Question3.You are planning a holiday for a group. You want some feedback from them about the plan. You would:":
+                    {"a. describe some of the highlights.","b. use a map or website to show them the places","c. give them a copy of the printed itinerary.",
+                    "d. phone, text or email them."},
+                    "Question4.You are going to cook something as a special treat for your family. You would:":{"a. cook something you know without the need for instructions.",
+                    "b. ask friends for suggestions.","c. look through the cookbook for ideas from the pictures.","d. use a cookbook where you know there is a good recipe."},
+                    "Question5.A group of tourists want to learn about the parks or nature reserves in your area. You would:":
+                    {"a. talk about, or arrange a talk for them about parks or nature reserves","b. show them internet pictures, photographs or picture books",
+                    "c. take them to a park or nature reserve and walk with them","d. give them a book or pamphlets about the parks or nature reserves."},
+                    "Question6.You are about to purchase a digital camera or mobile phone. Other than price, what would most influence your decision?":
+                    {"a. Trying or testing it.","b. Reading the details about its features","c. It is a modern design and looks good.","d. The salesperson telling me about its features."},
+                    "Question7.Remember a time when you learned how to do something new. Try to avoid choosing a physical skill, e.g. riding a bike. You learned best by:"
+                    :{"a. watching a demonstration","b. listening to somebody explaining it and asking questions","c. diagrams and charts - visual clues.",
+                    "d. written instructions e.g. a manual or textbook."},
+                    "Question8.You have a problem with your knee. You would prefer that the doctor:":{"a. gave you a web address or something to read about it.",
+                    "b. used a plastic model of a knee to show what was wrong."," c. described what was wrong","d. showed you a diagram of what was wrong."},
+                    "Question9.You want to learn a new programme, skill or game on a computer. You would:":{"a. read the written instructions that came with the programme.",
+                    "b. talk with people who know about the programme.","c. use the controls or keyboard.","d. follow the diagrams in the book that came with it."},
+                    "Question10.I like websites that have":{"a. things I can click on, shift or try.","b. interesting design and visual features."
+                    "c. interesting written descriptions, lists and explanations.","d. audio channels where I can hear music, radio programmes or interviews."},
+                    "Question11.Other than price, what would most influence your decision to buy a new non-fiction book?":{"a. The way it looks is appealing",
+                    "b. Quickly reading parts of it.","c. A friend talks about it and recommends it.","d. It has real-life stories, experiences and examples"},
+                    "Question12.You are using a book, DVD or website to learn how to take photos with your new digital camera. You would like to have:":
+                    {"a. a chance to ask questions and talk about the camera and its features","b. clear written instructions with lists and bullet points about what to do",
+                    "c. diagrams showing the camera and what each part does.","d. many examples of good and poor photos and how to improve them."},
+                    "Question13.Do you prefer a trainer or a presenter who uses:":{"a. demonstrations, models or practical sessions.",
+                    "b. question and answer, talk, group discussion, or guest speakers","c. handouts, books, or readings.","d. diagrams, charts or graphs."},
+                    "Question14.You have finished a competition or test and would like some feedback. You would like to have feedback:":{"a. using examples from what you have done.",
+                    "b. using a written description of your results.","c. from somebody who talks it through with you.","d. using graphs showing what you had achieved"},
+                    "Question15.You are going to choose food at a restaurant or cafe. You would:":{"a. choose something that you have had there before.",
+                    "b. listen to the waiter or ask friends to recommend choices.","c. choose from the descriptions in the menu.","d. look at what others are eating or look at pictures of each dish."},
+                    "Question16.You have to make an important speech at a conference or special occasion. You would:":{"a. make diagrams or get graphs to help explain things.",
+                    "b. write a few key words and practice saying your speech over and over.","c. write out your speech and learn from reading it over several times.",
+                    "d. gather many examples and stories to make the talk real and practical."}}
+    
+
+           self.scoring_chart= {1: ["K","A",	"R",	"V"],2: ["V",	"A",	"R",	"K"],3: ["K", "V", "R", "A"],4: ["K", "A", "V", "R"],5: ["A", "V","K", "R"],
+                              6: ["K", "R", "V", "A"],7: ["K", "A", "V", "R"],8: ["R", "K", "A", "V"],9: ["R",	"A",	"K",	"V"],10: ["K", "V",	"R",	"A"],11: ["V",	"R",	"A",	"K"],
+                              12: ["A", "R", "V", "K"],13: ["K", "A", "R", "V"],14: ["K", "R", "A", "V"],15: ["K", "A", "R", "V"],16:	["V","A",	"R",	"K"]} 
+           
+
+           self.scores={"V":0,"A":0,"R":0,"K":0}
+
+    def ask_questions(self):
+     for i,(question, options) in enumerate(self.questions.items() , 1):
+          print(f"\nQuestion {i}: {question}")
+          for j, option in enumerate(options, 1):
+                    print("{chr(64 + j)} .{option}") #A,B,C,D
+
+          
+          choices=input("Enter your choice(s), separated by commas(e.g.A,C)").strip().upper().split(',')
+          try:
+               for choice in choices:
+                    idx="ABCD".index(choice.strip())
+                    self.scores[self.scoring_chart[i][idx]] += 1
+          except (ValueError,IndexError):
+               print("invalid input. please enter letters A to D")
+
+
+
+    def determine_learning_preference(self):
+               best_preference=max(self.scores, key=self.scores.get)
+               
+               print("your VARK scores:", self.scores)
+               print("Your dominant learning perference is **{best_preference}**.")
+               if best_preference == "V":
+                    print("you learn best through visual representations such as diagram or graphs")
+               elif best_preference == "A":
+                    print("you learn best through auditory method such as discussion and spoken explainatiion")
+               elif best_preference == "R":
+                    print("you learn best in reading and writing_based learning including notes and lists")
+               elif best_preference == "K":
+                    print("you learn best through hands-on experience or practicals")
+
+
+vark_test=VARK()
+vark_test.ask_questions()
+vark_test.determine_learning_preference()
